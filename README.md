@@ -75,6 +75,33 @@ public class HelloWorld extends Endpoint {
 
 ```
 
+In case you want all endpoints to contain a certain set of headers you can also override the `getDefaultHeaders` method:
+```java
+package application;
+
+import core.Endpoint;
+import core.messages.Request;
+import core.messages.Response;
+
+public class HelloWorld extends Endpoint {
+    public String getUri() {
+        return "/hello-world";
+    }
+
+    @Override
+    protected Headers getDefaultHeaders() {
+        Headers headers = new Headers();
+        headers.add("ALLOW", "GET");
+        return headers;
+    }
+    
+    @Override
+    public Response get(Request request) {
+        return Response.ok();
+    }
+}
+```
+
 And then add the endpoint to the router:
 
 ```java
