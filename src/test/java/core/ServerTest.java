@@ -13,10 +13,28 @@ import static org.junit.Assert.assertNotEquals;
 
 public class ServerTest {
     @Test
+    public void serverIsAlwaysRunning() {
+        Server server = Server.defaultServer(5200);
+        assertTrue(server.isRunning());
+    }
+
+    @Test
     public void createsDefaultInstanceWithoutExceptions() {
-        Server server = Server.defaultServer(5202);
+        Server server = Server.defaultServer(5201);
         assertNotEquals(null, server);
         assertNotEquals(null, server.getRouter());
+    }
+
+    @Test
+    public void throwsExceptionIfPortIsUsed() {
+        Server server = Server.defaultServer(5202);
+
+        try {
+            Server.defaultServer(5202);
+            assertTrue(false);
+        }catch (RuntimeException ex) {
+            assertTrue(true);
+        }
     }
 
     @Test

@@ -49,11 +49,6 @@ public class Response {
         return this;
     }
 
-    public Response withHeader(Header header) {
-        this.headers.add(header);
-        return this;
-    }
-
     public Response withHeader(String name, String value) {
         this.headers.add(name, value);
         return this;

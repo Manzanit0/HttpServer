@@ -9,6 +9,10 @@ public class EndpointStub extends Endpoint {
     public EndpointStub() {
     }
 
+    public String getUri() {
+        return "/false_endpoint";
+    }
+
     @Override
     protected Headers getDefaultHeaders() {
         Headers headers = new Headers();
@@ -16,10 +20,7 @@ public class EndpointStub extends Endpoint {
         return headers;
     }
 
-    public String getUri() {
-        return "/false_endpoint";
-    }
-
+    @Override
     public Response get(Request request) {
         return Response.ok();
     }
