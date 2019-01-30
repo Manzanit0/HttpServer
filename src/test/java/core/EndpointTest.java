@@ -1,6 +1,7 @@
 package core;
 
 import core.models.Request;
+import core.models.RequestMethod;
 import core.models.Response;
 import org.junit.Test;
 import stubs.EndpointStub;
@@ -11,7 +12,7 @@ public class EndpointTest {
     @Test
     public void getsCorrectResponseForExistingMethod() {
         Endpoint endpoint = new EndpointStub();
-        Request request = new Request("GET", "/false_endpoint", "HTTP/1.1");
+        Request request = new Request(RequestMethod.GET, "/false_endpoint", "HTTP/1.1");
 
         Response response = endpoint.getResponse(request);
 
@@ -23,7 +24,7 @@ public class EndpointTest {
     @Test
     public void getsBadRequestForNonSupportedMethod() {
         Endpoint endpoint = new EndpointStub();
-        Request request = new Request("PATCH", "/false_endpoint", "HTTP/1.1");
+        Request request = new Request(RequestMethod.PATCH, "/false_endpoint", "HTTP/1.1");
 
         Response response = endpoint.getResponse(request);
 
@@ -34,25 +35,25 @@ public class EndpointTest {
 
     @Test
     public void getsNotAllowedForInexistentPostMethod() {
-        assertMethodExistance("POST");
+        assertMethodExistance(RequestMethod.POST);
     }
 
     @Test
     public void getsNotAllowedForInexistentHeadMethod() {
-        assertMethodExistance("HEAD");
+        assertMethodExistance(RequestMethod.HEAD);
     }
 
     @Test
     public void getsNotAllowedForInexistentOptionsMethod() {
-        assertMethodExistance("OPTIONS");
+        assertMethodExistance(RequestMethod.OPTIONS);
     }
 
     @Test
     public void getsNotAllowedForInexistentPutMethod() {
-        assertMethodExistance("PUT");
+        assertMethodExistance(RequestMethod.PUT);
     }
 
-    private void assertMethodExistance(String method) {
+    private void assertMethodExistance(RequestMethod method) {
         Endpoint endpoint = new EndpointStub();
         Request req = new Request(method, "/false_endpoint", "HTTP/1.1");
 

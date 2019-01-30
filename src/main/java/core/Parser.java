@@ -3,6 +3,7 @@ package core;
 import core.exceptions.HttpParseException;
 import core.models.Headers;
 import core.models.Request;
+import core.models.RequestMethod;
 
 public class Parser {
     public static Request parse(String requestString) throws HttpParseException {
@@ -10,7 +11,9 @@ public class Parser {
             Request request = new Request();
 
             String[] requestLine = parseRequestLine(requestString);
-            request.withMethod(requestLine[0])
+            RequestMethod method = parseMethod(requestLine[0]);
+
+            request.withMethod(method)
                     .withUri(requestLine[1])
                     .withHttpVersion(requestLine[2]);
 
@@ -47,5 +50,31 @@ public class Parser {
     private static String parseBody(String requestString) {
         String[] parts = requestString.split("\r\n\r\n");
         return parts.length == 2 ? parts[1] : null; // No body is not the same as empty body.
+    }
+
+    private static RequestMethod parseMethod(String method) {
+        RequestMethod methodType = null;
+
+        switch (method) {
+            case "GET":
+                methodType = RequestMethod.GET;
+                break;
+            case "POST":
+                methodType = RequestMethod.POST;
+                break;
+            case "PUT":
+                methodType = RequestMethod.PUT;
+                break;
+             case "PATCH":
+                methodType = RequestMethod.PATCH;
+                break;
+            case "HEAD":
+                methodType = RequestMethod.HEAD;
+                break;
+            case "OPTIONS":
+                methodType = RequestMethod.OPTIONS;
+        }
+
+        return methodType;
     }
 }

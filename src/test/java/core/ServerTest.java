@@ -1,5 +1,6 @@
 package core;
 
+import core.models.RequestMethod;
 import core.models.Response;
 import org.junit.Test;
 import stubs.ConnectionStub;
@@ -30,7 +31,7 @@ public class ServerTest {
 
         server.handleRequest();
 
-        assertEquals("GET", routerStub.getLastRequest().getMethod());
+        assertEquals(RequestMethod.GET, routerStub.getLastRequest().getMethod());
         assertEquals("/hello-world", routerStub.getLastRequest().getUri());
         assertTrue(connectionStub.getLastResponse().contains("OK"));
     }
@@ -61,7 +62,7 @@ public class ServerTest {
 
         server.start();
 
-        assertEquals("GET", routerStub.getLastRequest().getMethod());
+        assertEquals(RequestMethod.GET, routerStub.getLastRequest().getMethod());
         assertEquals("/bye-world", routerStub.getLastRequest().getUri());
         assertTrue(connectionStub.getLastResponse().contains("REDIRECT"));
     }

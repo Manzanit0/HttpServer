@@ -35,19 +35,19 @@ public abstract class Endpoint {
         Response res;
 
         switch (request.getMethod()) {
-            case "POST":
+            case POST:
                 res = post(request);
                 break;
-            case "GET":
+            case GET:
                 res = get(request);
                 break;
-            case "PUT":
+            case PUT:
                 res = put(request);
                 break;
-            case "HEAD":
+            case HEAD:
                 res = head(request);
                 break;
-            case "OPTIONS":
+            case OPTIONS:
                 res = options(request);
                 break;
             default:

@@ -1,7 +1,7 @@
 package core.models;
 
 public class Request {
-    private String method;
+    private RequestMethod method;
     private String uri;
     private String httpVersion;
     private Headers headers;
@@ -10,13 +10,13 @@ public class Request {
     public Request() {
     }
 
-    public Request(String method, String uri, String httpVersion) {
+    public Request(RequestMethod method, String uri, String httpVersion) {
         this.method = method;
         this.uri = uri;
         this.httpVersion = httpVersion;
     }
 
-    public Request withMethod(String method) {
+    public Request withMethod(RequestMethod method) {
         this.method = method;
         return this;
     }
@@ -41,7 +41,7 @@ public class Request {
         return this;
     }
 
-    public String getMethod() {
+    public RequestMethod getMethod() {
         return method;
     }
 
@@ -60,4 +60,6 @@ public class Request {
     public String getBody() {
         return body;
     }
+
+
 }

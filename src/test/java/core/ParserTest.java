@@ -3,6 +3,7 @@ package core;
 import core.exceptions.HttpParseException;
 import core.models.Headers;
 import core.models.Request;
+import core.models.RequestMethod;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -14,7 +15,7 @@ public class ParserTest {
     public void parseRequestWithoutHeaders() throws HttpParseException {
         String requestString = "GET /helloworld HTTP/1.1\n";
 
-        Request request = new Request("GET", "/helloworld", "HTTP/1.1");
+        Request request = new Request(RequestMethod.GET, "/helloworld", "HTTP/1.1");
         Request parsedRequest = Parser.parse(requestString);
 
         assertEquals(request.getMethod(), parsedRequest.getMethod());
@@ -34,7 +35,7 @@ public class ParserTest {
         headers.add("User-Agent", "Mozilla/4.0 (compatible; MSIE5.01; Windows NT)");
         headers.add("Host", "localhost");
         headers.add("Connection", "Keep-Alive");
-        Request request = new Request("GET", "/helloworld", "HTTP/1.1")
+        Request request = new Request(RequestMethod.GET, "/helloworld", "HTTP/1.1")
                 .withHeaders(headers);
 
         Request parsedRequest = Parser.parse(requestString);
@@ -59,7 +60,7 @@ public class ParserTest {
         Headers headers = new Headers();
         headers.add("Content-Type", "application/text");
         headers.add("Content-Length", "456");
-        Request request = new Request("POST", "localhost", "HTTP/1.1")
+        Request request = new Request(RequestMethod.POST, "localhost", "HTTP/1.1")
                 .withHeaders(headers)
                 .withBody("Some body");
 
