@@ -1,9 +1,9 @@
 package application;
 
 import core.Endpoint;
-import core.models.Headers;
-import core.models.Request;
-import core.models.Response;
+import core.messages.Headers;
+import core.messages.Request;
+import core.messages.Response;
 
 public class MethodOptions2 extends Endpoint {
     public MethodOptions2() {

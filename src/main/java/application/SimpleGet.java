@@ -1,8 +1,8 @@
 package application;
 
 import core.Endpoint;
-import core.models.Request;
-import core.models.Response;
+import core.messages.Request;
+import core.messages.Response;
 
 public class SimpleGet extends Endpoint {
     public String getUri() {

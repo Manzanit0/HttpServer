@@ -1,7 +1,7 @@
 package core;
 
-import core.models.Request;
-import core.models.Response;
+import core.messages.Request;
+import core.messages.Response;
 
 import java.util.HashMap;
 import java.util.Map;

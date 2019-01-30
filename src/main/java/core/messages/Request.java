@@ -1,4 +1,4 @@
-package core.models;
+package core.messages;
 
 public class Request {
     private RequestMethod method;

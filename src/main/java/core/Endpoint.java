@@ -1,8 +1,8 @@
 package core;
 
-import core.models.Headers;
-import core.models.Request;
-import core.models.Response;
+import core.messages.Headers;
+import core.messages.Request;
+import core.messages.Response;
 
 public abstract class Endpoint {
     public abstract String getUri();

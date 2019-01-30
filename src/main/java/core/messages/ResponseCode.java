@@ -1,6 +1,6 @@
-package core.models;
+package core.messages;
 
-public enum ResponseType {
+public enum ResponseCode {
     OK(200, "OK"),
     REDIRECT(301, "REDIRECT"),
     BAD_REQUEST(400, "BAD REQUEST"),
@@ -11,7 +11,7 @@ public enum ResponseType {
     private int code;
     private String reason;
 
-    ResponseType(int code, String reason) {
+    ResponseCode(int code, String reason) {
         this.code = code;
         this.reason = reason;
     }

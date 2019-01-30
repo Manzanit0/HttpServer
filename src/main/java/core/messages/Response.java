@@ -1,13 +1,13 @@
-package core.models;
+package core.messages;
 
 public class Response {
     private static final String HTTP_VERSION = "HTTP/1.1";
 
-    private ResponseType type;
+    private ResponseCode type;
     private Headers headers;
     private String body;
 
-    public Response(ResponseType type) {
+    public Response(ResponseCode type) {
         this.type = type;
         this.body = "";
 
@@ -16,27 +16,27 @@ public class Response {
     }
 
     public static Response notFound() {
-        return new Response(ResponseType.NOT_FOUND);
+        return new Response(ResponseCode.NOT_FOUND);
     }
 
     public static Response ok() {
-        return new Response(ResponseType.OK);
+        return new Response(ResponseCode.OK);
     }
 
     public static Response redirect() {
-        return new Response(ResponseType.REDIRECT);
+        return new Response(ResponseCode.REDIRECT);
     }
 
     public static Response notAllowed() {
-        return new Response(ResponseType.NOT_ALLOWED);
+        return new Response(ResponseCode.NOT_ALLOWED);
     }
 
     public static Response badRequest() {
-        return new Response(ResponseType.BAD_REQUEST);
+        return new Response(ResponseCode.BAD_REQUEST);
     }
 
     public static Response internalError() {
-        return new Response(ResponseType.INTERNAL_SERVER_ERROR);
+        return new Response(ResponseCode.INTERNAL_SERVER_ERROR);
     }
 
     public Response withBody(String body) {

@@ -1,11 +1,8 @@
 package core;
 
-import core.models.Headers;
-import core.models.Response;
+import core.messages.Headers;
+import core.messages.Response;
 import org.junit.Test;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 

@@ -1,8 +1,8 @@
 package core;
 
 import core.exceptions.HttpParseException;
-import core.models.Request;
-import core.models.Response;
+import core.messages.Request;
+import core.messages.Response;
 
 import java.io.IOException;
 import java.net.ServerSocket;

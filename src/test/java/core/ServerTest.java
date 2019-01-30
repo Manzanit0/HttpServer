@@ -1,7 +1,7 @@
 package core;
 
-import core.models.RequestMethod;
-import core.models.Response;
+import core.messages.RequestMethod;
+import core.messages.Response;
 import org.junit.Test;
 import stubs.ConnectionStub;
 import stubs.RouterStub;

@@ -1,9 +1,9 @@
 package core;
 
 import core.exceptions.HttpParseException;
-import core.models.Headers;
-import core.models.Request;
-import core.models.RequestMethod;
+import core.messages.Headers;
+import core.messages.Request;
+import core.messages.RequestMethod;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

@@ -1,8 +1,8 @@
 package stubs;
 
 import core.Router;
-import core.models.Request;
-import core.models.Response;
+import core.messages.Request;
+import core.messages.Response;
 
 import java.util.Arrays;
 import java.util.LinkedList;

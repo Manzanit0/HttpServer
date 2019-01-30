@@ -1,9 +1,9 @@
 package stubs;
 
 import core.Endpoint;
-import core.models.Headers;
-import core.models.Request;
-import core.models.Response;
+import core.messages.Headers;
+import core.messages.Request;
+import core.messages.Response;
 
 public class EndpointStub extends Endpoint {
     public EndpointStub() {

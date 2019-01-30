@@ -59,8 +59,8 @@ implement all the HTTP methods you require, such as below:
 package application;
 
 import core.Endpoint;
-import core.models.Request;
-import core.models.Response;
+import core.messages.Request;
+import core.messages.Response;
 
 public class HelloWorld extends Endpoint {
     public String getUri() {
