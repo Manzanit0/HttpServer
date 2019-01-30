@@ -3,16 +3,23 @@ package application;
 import core.Endpoint;
 import core.models.Request;
 import core.models.Response;
+import core.models.ResponseHeader;
 
-import java.util.Arrays;
+import java.util.Map;
+
+import static core.models.ResponseHeader.*;
 
 public class GetWithBody extends Endpoint {
     public GetWithBody() {
-        setAllowedMethodsHeader(Arrays.asList("HEAD", "OPTIONS"));
     }
 
     public String getUri() {
         return "/get_with_body";
+    }
+
+    @Override
+    protected Map<ResponseHeader, String> getDefaultHeaders() {
+        return Map.of(ALLOW, "HEAD,OPTIONS");
     }
 
     @Override

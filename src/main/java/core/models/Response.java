@@ -13,8 +13,9 @@ public class Response {
 
     public Response(ResponseType type) {
         this.type = type;
-        this.headers = new LinkedHashMap<>();
         this.body = "";
+        this.headers = new LinkedHashMap<>();
+        headers.putAll(Map.of(ResponseHeader.SERVER, "Javier's awesome server"));
     }
 
     public static Response notFound() {
@@ -84,7 +85,7 @@ public class Response {
     }
 
     private String getFormattedHeaders() {
-        if (getHeaders() == null || getHeaders().size() == 0) return "";
+        if (getHeaders().size() == 0) return "";
 
         StringBuilder formattedHeaders = new StringBuilder();
 
@@ -97,6 +98,6 @@ public class Response {
     }
 
     private String getFormattedBody() {
-        return getBody() == null || getBody().isEmpty() ? "" : "\n" + getBody().trim();
+        return getBody().isEmpty() ? "" : "\n" + getBody().trim();
     }
 }

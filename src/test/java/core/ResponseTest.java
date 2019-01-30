@@ -23,7 +23,7 @@ public class ResponseTest {
     public void buildsResponseBasicResponse() {
         Response res = Response.ok();
 
-        assertEquals("HTTP/1.1 200 OK\n", res.toString());
+        assertEquals("HTTP/1.1 200 OK\nServer: Javier's awesome server\n", res.toString());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ResponseTest {
         Response res = Response.redirect()
                 .withBody("some body");
 
-        assertEquals("HTTP/1.1 301 REDIRECT\n\nsome body", res.toString());
+        assertEquals("HTTP/1.1 301 REDIRECT\nServer: Javier's awesome server\n\nsome body", res.toString());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ResponseTest {
                 .withHeaders(headers)
                 .withBody("some body");
 
-        assertEquals("HTTP/1.1 200 OK\nLocation: value1\nAllow: value2\n\nsome body", res.toString());
+        assertEquals("HTTP/1.1 200 OK\nServer: Javier's awesome server\nLocation: value1\nAllow: value2\n\nsome body", res.toString());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ResponseTest {
                 .withHeader(ResponseHeader.LOCATION, "value1")
                 .withHeader(ResponseHeader.ALLOW, "value2");
 
-        assertEquals("HTTP/1.1 200 OK\nLocation: value1\nAllow: value2\n", res.toString());
+        assertEquals("HTTP/1.1 200 OK\nServer: Javier's awesome server\nLocation: value1\nAllow: value2\n", res.toString());
     }
 
     @Test

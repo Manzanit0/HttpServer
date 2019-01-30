@@ -4,14 +4,10 @@ import core.models.Request;
 import core.models.Response;
 import core.models.ResponseHeader;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public abstract class Endpoint {
-    private List<String> allowedMethods = new ArrayList<>();
-
     public abstract String getUri();
 
     protected Response post(Request request) {
@@ -32,6 +28,10 @@ public abstract class Endpoint {
 
     protected Response options(Request request) {
         return Response.notAllowed();
+    }
+
+    protected Map<ResponseHeader, String> getDefaultHeaders() {
+        return new LinkedHashMap<>();
     }
 
     public Response getResponse(Request request) {
@@ -57,22 +57,7 @@ public abstract class Endpoint {
                 res = Response.badRequest();
         }
 
-        return res.withHeaders(getDefaultHeaders());
-    }
-
-    private Map<ResponseHeader, String> getDefaultHeaders() {
-        Map<ResponseHeader, String> defaultHeaders = new HashMap<>();
-
-        defaultHeaders.put(ResponseHeader.SERVER, "Javier's awesome server");
-
-        if (!allowedMethods.isEmpty()) {
-            defaultHeaders.put(ResponseHeader.ALLOW, String.join(",", allowedMethods));
-        }
-
-        return defaultHeaders;
-    }
-
-    protected void setAllowedMethodsHeader(List<String> allowedMethods) {
-        this.allowedMethods = allowedMethods;
+        Map<ResponseHeader, String> defaultHeaders = getDefaultHeaders();
+        return res.withHeaders(defaultHeaders);
     }
 }
