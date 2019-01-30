@@ -1,10 +1,9 @@
 package core;
 
 import core.exceptions.HttpParseException;
+import core.models.Headers;
 import core.models.Request;
 import org.junit.Test;
-
-import java.util.LinkedHashMap;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -31,10 +30,10 @@ public class ParserTest {
                         "Host: localhost\n" +
                         "Connection: Keep-Alive";
 
-        LinkedHashMap<String, String> headers = new LinkedHashMap<>();
-        headers.put("User-Agent", "Mozilla/4.0 (compatible; MSIE5.01; Windows NT)");
-        headers.put("Host", "localhost");
-        headers.put("Connection", "Keep-Alive");
+        Headers headers = new Headers();
+        headers.add("User-Agent", "Mozilla/4.0 (compatible; MSIE5.01; Windows NT)");
+        headers.add("Host", "localhost");
+        headers.add("Connection", "Keep-Alive");
         Request request = new Request("GET", "/helloworld", "HTTP/1.1")
                 .withHeaders(headers);
 
@@ -43,9 +42,9 @@ public class ParserTest {
         assertEquals(request.getMethod(), parsedRequest.getMethod());
         assertEquals(request.getHttpVersion(), parsedRequest.getHttpVersion());
         assertEquals(request.getUri(), parsedRequest.getUri());
-        assertEquals(request.getHeaders().get("Host"), parsedRequest.getHeaders().get("Host"));
-        assertEquals(request.getHeaders().get("Connection"), parsedRequest.getHeaders().get("Connection"));
-        assertEquals(request.getHeaders().get("User-Agent"), parsedRequest.getHeaders().get("User-Agent"));
+        assertEquals(request.getHeaders().get("Host").getValue(), parsedRequest.getHeaders().get("Host").getValue());
+        assertEquals(request.getHeaders().get("Connection").getValue(), parsedRequest.getHeaders().get("Connection").getValue());
+        assertEquals(request.getHeaders().get("User-Agent").getValue(), parsedRequest.getHeaders().get("User-Agent").getValue());
     }
 
     @Test
@@ -57,9 +56,9 @@ public class ParserTest {
                         "\r\n\r\n" +
                         "Some body";
 
-        LinkedHashMap<String, String> headers = new LinkedHashMap<>();
-        headers.put("Content-Type", "application/text");
-        headers.put("Content-Length", "456");
+        Headers headers = new Headers();
+        headers.add("Content-Type", "application/text");
+        headers.add("Content-Length", "456");
         Request request = new Request("POST", "localhost", "HTTP/1.1")
                 .withHeaders(headers)
                 .withBody("Some body");
@@ -69,8 +68,8 @@ public class ParserTest {
         assertEquals(request.getMethod(), parsedRequest.getMethod());
         assertEquals(request.getHttpVersion(), parsedRequest.getHttpVersion());
         assertEquals(request.getUri(), parsedRequest.getUri());
-        assertEquals(request.getHeaders().get("Content-Type"), parsedRequest.getHeaders().get("Content-Type"));
-        assertEquals(request.getHeaders().get("Content-Length"), parsedRequest.getHeaders().get("Content-Length"));
+        assertEquals(request.getHeaders().get("Content-Type").getValue(), parsedRequest.getHeaders().get("Content-Type").getValue());
+        assertEquals(request.getHeaders().get("Content-Length").getValue(), parsedRequest.getHeaders().get("Content-Length").getValue());
         assertEquals(request.getBody(), parsedRequest.getBody());
     }
 

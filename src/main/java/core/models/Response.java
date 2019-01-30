@@ -1,21 +1,18 @@
 package core.models;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 public class Response {
     private static final String HTTP_VERSION = "HTTP/1.1";
 
     private ResponseType type;
-    private Map<ResponseHeader, String> headers;
+    private Headers headers;
     private String body;
 
     public Response(ResponseType type) {
         this.type = type;
         this.body = "";
-        this.headers = new LinkedHashMap<>();
-        headers.putAll(Map.of(ResponseHeader.SERVER, "Javier's awesome server"));
+
+        this.headers = new Headers();
+        this.headers.add("Server", "Javier's awesome server");
     }
 
     public static Response notFound() {
@@ -47,13 +44,18 @@ public class Response {
         return this;
     }
 
-    public Response withHeaders(Map<ResponseHeader, String> headers) {
-        this.headers.putAll(headers);
+    public Response withHeaders(Headers headers) {
+        this.headers.addAll(headers);
         return this;
     }
 
-    public Response withHeader(ResponseHeader key, String value) {
-        this.headers.put(key, value);
+    public Response withHeader(Header header) {
+        this.headers.add(header);
+        return this;
+    }
+
+    public Response withHeader(String name, String value) {
+        this.headers.add(name, value);
         return this;
     }
 
@@ -69,7 +71,7 @@ public class Response {
         return type.getReason();
     }
 
-    public Map<ResponseHeader, String> getHeaders() {
+    public Headers getHeaders() {
         return headers;
     }
 
@@ -80,21 +82,8 @@ public class Response {
     @Override
     public String toString() {
         return getHttpVersion() + " " + getStatusCode() + " " + getReason() + "\n"
-                + getFormattedHeaders()
+                + headers.toString()
                 + getFormattedBody();
-    }
-
-    private String getFormattedHeaders() {
-        if (getHeaders().size() == 0) return "";
-
-        StringBuilder formattedHeaders = new StringBuilder();
-
-        for (Entry<ResponseHeader, String> entry : getHeaders().entrySet()) {
-            formattedHeaders.append(
-                    String.format("%s: %s%n", entry.getKey().getValue(), entry.getValue()));
-        }
-
-        return formattedHeaders.toString();
     }
 
     private String getFormattedBody() {

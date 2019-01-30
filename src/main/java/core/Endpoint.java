@@ -1,11 +1,8 @@
 package core;
 
+import core.models.Headers;
 import core.models.Request;
 import core.models.Response;
-import core.models.ResponseHeader;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public abstract class Endpoint {
     public abstract String getUri();
@@ -30,8 +27,8 @@ public abstract class Endpoint {
         return Response.notAllowed();
     }
 
-    protected Map<ResponseHeader, String> getDefaultHeaders() {
-        return new LinkedHashMap<>();
+    protected Headers getDefaultHeaders() {
+        return new Headers();
     }
 
     public Response getResponse(Request request) {
@@ -57,7 +54,7 @@ public abstract class Endpoint {
                 res = Response.badRequest();
         }
 
-        Map<ResponseHeader, String> defaultHeaders = getDefaultHeaders();
+        Headers defaultHeaders = getDefaultHeaders();
         return res.withHeaders(defaultHeaders);
     }
 }

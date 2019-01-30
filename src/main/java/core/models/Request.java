@@ -1,12 +1,10 @@
 package core.models;
 
-import java.util.Map;
-
 public class Request {
     private String method;
     private String uri;
     private String httpVersion;
-    private Map<String, String> headers;
+    private Headers headers;
     private String body;
 
     public Request() {
@@ -38,7 +36,7 @@ public class Request {
         return this;
     }
 
-    public Request withHeaders(Map<String, String> headers) {
+    public Request withHeaders(Headers headers) {
         this.headers = headers;
         return this;
     }
@@ -55,7 +53,7 @@ public class Request {
         return httpVersion;
     }
 
-    public Map getHeaders() {
+    public Headers getHeaders() {
         return headers;
     }
 
