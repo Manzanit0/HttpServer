@@ -24,6 +24,8 @@ public class Parser {
             request.withBody(body);
 
             return request;
+        } catch (HttpParseException ex) {
+            throw ex;
         } catch (Exception ex) {
             throw new HttpParseException(ex);
         }
@@ -52,27 +54,24 @@ public class Parser {
         return parts.length == 2 ? parts[1] : null; // No body is not the same as empty body.
     }
 
-    private static RequestMethod parseMethod(String method) {
-        RequestMethod methodType = null;
+    private static RequestMethod parseMethod(String method) throws HttpParseException {
+        RequestMethod methodType;
 
         switch (method) {
-            case "GET":
-                methodType = RequestMethod.GET;
+            case "GET": methodType = RequestMethod.GET;
                 break;
-            case "POST":
-                methodType = RequestMethod.POST;
+            case "POST": methodType = RequestMethod.POST;
                 break;
-            case "PUT":
-                methodType = RequestMethod.PUT;
+            case "PUT": methodType = RequestMethod.PUT;
                 break;
-             case "PATCH":
-                methodType = RequestMethod.PATCH;
+             case "PATCH": methodType = RequestMethod.PATCH;
                 break;
-            case "HEAD":
-                methodType = RequestMethod.HEAD;
+            case "HEAD": methodType = RequestMethod.HEAD;
                 break;
-            case "OPTIONS":
-                methodType = RequestMethod.OPTIONS;
+            case "OPTIONS": methodType = RequestMethod.OPTIONS;
+                break;
+
+            default: throw new HttpParseException("Method not supported: " + method);
         }
 
         return methodType;

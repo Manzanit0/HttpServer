@@ -9,4 +9,8 @@ public class HttpParseException extends Exception {
     public HttpParseException(Exception ex) {
         super(ex);
     }
+
+    public HttpParseException(String message) {
+        super(message);
+    }
 }
