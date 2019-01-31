@@ -18,7 +18,7 @@ public class EndpointTest {
 
         assertEquals(200, response.getStatusCode());
         assertEquals("OK", response.getReason());
-        assertEquals("GET", response.getHeaders().get("Allow").getValue());
+        assertEquals("GET", response.getHeaders().get("Allow"));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class EndpointTest {
 
         assertEquals(400, response.getStatusCode());
         assertEquals("BAD REQUEST", response.getReason());
-        assertEquals("GET", response.getHeaders().get("Allow").getValue());
+        assertEquals("GET", response.getHeaders().get("Allow"));
     }
 
     @Test
@@ -61,6 +61,6 @@ public class EndpointTest {
 
         assertEquals(405, res.getStatusCode());
         assertEquals("NOT ALLOWED", res.getReason());
-        assertEquals("GET", res.getHeaders().get("Allow").getValue());
+        assertEquals("GET", res.getHeaders().get("Allow"));
     }
 }

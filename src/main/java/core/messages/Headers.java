@@ -3,43 +3,36 @@ package core.messages;
 import java.util.*;
 
 public class Headers {
-    private Map<String, Header> headers;
+    private Map<String, String> headers;
 
     public Headers() {
         this.headers = new LinkedHashMap<>();
     }
 
     public void addAll(Headers headers) {
-        for(Header header : headers.asCollection()) {
-            add(header);
-        }
-    }
-
-    public void add(Header header) {
-        this.headers.put(header.getName(), header);
+        this.headers.putAll(headers.getHeadersMap());
     }
 
     public void add(String name, String value) {
-        Header header = new Header(name, value);
-        add(header);
+        headers.put(name, value);
     }
 
-    public Header get(String name) {
-    return this.headers.get(name);
+    public String get(String name) {
+        return this.headers.get(name);
     }
 
     @Override
     public String toString() {
         StringBuilder formattedHeaders = new StringBuilder();
-        for (Header header : headers.values()) {
-            formattedHeaders.append(String.format("%s: %s%n", header.getName(), header.getValue()));
+        for (String headerName : headers.keySet()) {
+            formattedHeaders.append(String.format("%s: %s%n", headerName, headers.get(headerName)));
         }
 
         return formattedHeaders.toString();
     }
 
-    private Collection<Header> asCollection() {
-        return this.headers.values();
+    private Map<String, String> getHeadersMap() {
+        return headers;
     }
 }
 

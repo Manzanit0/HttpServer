@@ -43,9 +43,9 @@ public class ParserTest {
         assertEquals(request.getMethod(), parsedRequest.getMethod());
         assertEquals(request.getHttpVersion(), parsedRequest.getHttpVersion());
         assertEquals(request.getUri(), parsedRequest.getUri());
-        assertEquals(request.getHeaders().get("Host").getValue(), parsedRequest.getHeaders().get("Host").getValue());
-        assertEquals(request.getHeaders().get("Connection").getValue(), parsedRequest.getHeaders().get("Connection").getValue());
-        assertEquals(request.getHeaders().get("User-Agent").getValue(), parsedRequest.getHeaders().get("User-Agent").getValue());
+        assertEquals(request.getHeaders().get("Host"), parsedRequest.getHeaders().get("Host"));
+        assertEquals(request.getHeaders().get("Connection"), parsedRequest.getHeaders().get("Connection"));
+        assertEquals(request.getHeaders().get("User-Agent"), parsedRequest.getHeaders().get("User-Agent"));
     }
 
     @Test
@@ -69,8 +69,8 @@ public class ParserTest {
         assertEquals(request.getMethod(), parsedRequest.getMethod());
         assertEquals(request.getHttpVersion(), parsedRequest.getHttpVersion());
         assertEquals(request.getUri(), parsedRequest.getUri());
-        assertEquals(request.getHeaders().get("Content-Type").getValue(), parsedRequest.getHeaders().get("Content-Type").getValue());
-        assertEquals(request.getHeaders().get("Content-Length").getValue(), parsedRequest.getHeaders().get("Content-Length").getValue());
+        assertEquals(request.getHeaders().get("Content-Type"), parsedRequest.getHeaders().get("Content-Type"));
+        assertEquals(request.getHeaders().get("Content-Length"), parsedRequest.getHeaders().get("Content-Length"));
         assertEquals(request.getBody(), parsedRequest.getBody());
     }
 
