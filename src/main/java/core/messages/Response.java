@@ -82,6 +82,8 @@ public class Response {
     }
 
     private String getFormattedBody() {
-        return getBody().isEmpty() ? "" : "\n" + getBody().trim();
+        return getBody() == null || getBody().isEmpty()
+                ? ""
+                : "\n" + getBody().trim();
     }
 }
